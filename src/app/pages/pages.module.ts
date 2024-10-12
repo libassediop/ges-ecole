@@ -27,6 +27,8 @@ import { DashboardsModule } from './dashboards/dashboards.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ImagesComponent } from './images/images.component';
 import {Ng5SliderModule} from "ng5-slider";
+import { EcoleComponent } from './ecole/ecole.component';
+import { SuperAdminComponent } from './super-admin/super-admin.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -36,7 +38,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 
 @NgModule({
   declarations: [
-    ImagesComponent
+    ImagesComponent,
+    EcoleComponent,
+    SuperAdminComponent
   ],
   imports: [
     CommonModule,

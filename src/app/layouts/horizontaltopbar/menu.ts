@@ -23,40 +23,42 @@ export const MENU: MenuItem[] = [
   {
     id: 2,
     label: 'Super admin',
-    icon: 'bx-home-circle',
-    subItems: [
-      {
-        id: 2,
-        label: 'Nouveau super admin ',
-        link: '/dashboard',
-        parentId: 1
-      },
-      {
-        id: 3,
-        label: 'Liste super admin',
-        link: '/image',
-        parentId: 1
-      }
-    ]
+    icon: 'bx bx-user-circle',
+    link: '/super-admin',
+    // subItems: [
+    //   {
+    //     id: 2,
+    //     label: 'Nouveau super admin ',
+    //     link: '/dashboard',
+    //     parentId: 1
+    //   },
+    //   {
+    //     id: 3,
+    //     label: 'Liste super admin',
+    //     link: '/image',
+    //     parentId: 1
+    //   }
+    // ]
   },
   {
-    id: 2,
+    id: 3,
     label: 'Ecole',
-    icon: 'bx-home-circle',
-    subItems: [
-      {
-        id: 2,
-        label: 'Ajouter une école',
-        link: '/dashboard',
-        parentId: 1
-      },
-      {
-        id: 3,
-        label: 'Voir les écoles',
-        link: '/image',
-        parentId: 1
-      }
-    ]
+    icon: 'bx bxs-school',
+    link: '/ecole'
+    // subItems: [
+    //   {
+    //     id: 2,
+    //     label: 'Ajouter une école',
+    //     link: '/dashboard',
+    //     parentId: 1
+    //   },
+    //   {
+    //     id: 3,
+    //     label: 'Voir les écoles',
+    //     link: '/image',
+    //     parentId: 1
+    //   }
+    // ]
   },
 
 
