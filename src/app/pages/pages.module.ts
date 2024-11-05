@@ -30,6 +30,9 @@ import {Ng5SliderModule} from "ng5-slider";
 import { EcoleComponent } from './ecole/ecole.component';
 import { SuperAdminComponent } from './super-admin/super-admin.component';
 
+
+
+
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,
@@ -40,7 +43,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   declarations: [
     ImagesComponent,
     EcoleComponent,
-    SuperAdminComponent
+    SuperAdminComponent, 
   ],
   imports: [
     CommonModule,
@@ -61,7 +64,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     SimplebarAngularModule,
     LightboxModule,
     Ng5SliderModule,
-    NgbPaginationModule
+    NgbPaginationModule,
   ],
 })
 export class PagesModule { }

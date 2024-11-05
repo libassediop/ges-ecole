@@ -60,6 +60,42 @@ export const MENU: MenuItem[] = [
     //   }
     // ]
   },
+  {
+    id: 4,
+    label: 'Classe',
+    icon: 'bx bxs-institution',
+    link:'classe/classe'
+  },
+  {
+    id: 5,
+    label: 'Parent',
+    icon: 'bx bxs-user',
+    link:'parent/parent'
+  },
+  {
+    id: 6,
+    label: 'Professeur',
+    icon: 'bx bxs-user-rectangle',
+    link:'professeur/professeur'
+  },
+  {
+    id: 7,
+    label: 'Eleve',
+    icon: 'bx bxs-user-detail',
+    link:'eleve/eleve'  
+  },
+  {
+    id: 8,
+    label: 'Personnel',
+    icon: 'bx bxs-user-badge',
+    link:'personnel/personnel'
+  },
+  {
+  id: 9,
+  label: 'Matiere',
+  icon: 'bx bxs-edit',
+  link:'matiere/matiere'
+  },
 
 
 ];
