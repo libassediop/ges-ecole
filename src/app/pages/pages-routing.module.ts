@@ -10,6 +10,11 @@ import { LayoutComponent } from '../layouts/layout.component';
 import { DashboardsModule } from './dashboards/dashboards.module';
 
 import { ClasseModule } from './Classe/classe/classe.module';
+import { EtudiantModule } from './Etudiant/etudiant/etudiant.module';
+import { ParentModule } from './Parent/parent/parent.module';
+import { MatiereModule } from './Matiere/matiere/matiere.module';
+import { PersonnelModule } from './Personnel/personnel/personnel.module';
+import { ProfesseurModule } from './Professeur/professeur/professeur.module';
 // import { ClasseComponent } from './Classe/classe/classe.component';
 
 const routes: Routes = [
@@ -20,6 +25,11 @@ const routes: Routes = [
   { path: 'ecole', component: EcoleComponent },
   { path: 'super-admin', component: SuperAdminComponent },
   { path: 'classe', loadChildren: () => ClasseModule },
+  { path: 'etudiant', loadChildren: () => EtudiantModule },
+  { path: 'parent', loadChildren: () => ParentModule },
+  { path: 'matiere', loadChildren: () => MatiereModule },
+  { path: 'personnel', loadChildren: () => PersonnelModule },
+  { path: 'professeur', loadChildren: () => ProfesseurModule},
   { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
   
 ];

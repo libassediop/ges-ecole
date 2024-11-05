@@ -80,9 +80,9 @@ export const MENU: MenuItem[] = [
   },
   {
     id: 7,
-    label: 'Eleve',
+    label: 'Etudiant',
     icon: 'bx bxs-user-detail',
-    link:'eleve/eleve'  
+    link:'etudiant/etudiant'  
   },
   {
     id: 8,

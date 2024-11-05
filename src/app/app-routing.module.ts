@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule), canActivate: [AuthGuard] },
   { path: 'classe', loadChildren: () => import('./pages/Classe/classe/classe.module').then(m => m.ClasseModule) },
   { path: 'parent', loadChildren: () => import('./pages/Parent/parent/parent.module').then(m => m.ParentModule) },
-  { path: 'etudiant', loadChildren: () => import('./pages/Eleve/etudiant/etudiant.module').then(m => m.EtudiantModule) },
+  { path: 'etudiant', loadChildren: () => import('./pages/Etudiant/etudiant/etudiant.module').then(m => m.EtudiantModule) },
   { path: 'professeur', loadChildren: () => import('./pages/Professeur/professeur/professeur.module').then(m => m.ProfesseurModule) },
   { path: 'matiere', loadChildren: () => import('./pages/Matiere/matiere/matiere.module').then(m => m.MatiereModule) },
   { path: 'personnel', loadChildren: () => import('./pages/Personnel/personnel/personnel.module').then(m => m.PersonnelModule) },
