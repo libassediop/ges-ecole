@@ -1,1 +1,168 @@
-<p>classe works!</p>
+<div class="container-fluid">
+    <app-page-title title="Gestion Des Classes"></app-page-title>
+    <div class="row">
+      <div class="col-xl-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="me-2">
+                <!-- <h5 *ngIf="!update" class="card-title mb-4 text-primary">Ajout Classe</h5>
+                <h5 *ngIf="update" class="card-title mb-4 text-primary">Modifier Classe</h5> -->
+              </div>
+  
+            </div>
+            <form > 
+                <!-- (ngSubmit)="Addclasse()" -->
+              <div class="text-center mt-4">
+                <div class="input-group bg-light rounded" [formGroup]="formClasse">
+                  <input type="text" class="form-control bg-transparent border-0" placeholder="Nom Classe"
+                    formControlName="libelle">
+                </div>
+              </div>
+  
+              <div class="text-center mt-4">
+                <div class="input-group bg-light rounded" [formGroup]="formClasse">
+                  <select type="text" class="form-control bg-transparent border-0" formControlName="niveau">
+                    <option value="" selected disabled>Veuillez choisir le niveau</option>
+                    <option value="1">1er Cycle</option>
+                    <option value="2">2eme Cycle</option>
+                    <option value="3">3eme Cycle</option>
+                  </select>
+                </div>
+              </div>
+              <div class="text-center mt-4">
+                <div class="text-center">
+                  <!-- <button *ngIf="!update" type="button" class="btn btn-success btn-rounded mb-2 me-2" (click)="Addclasse()"
+                    [disabled]="formClasse.invalid"><i class="mdi mdi-plus mr-1"></i>
+                    Ajouter</button>
+                  <button *ngIf="update" type="button" class="btn btn-warning btn-rounded mb-2 me-2"
+                    (click)="ModifierClasse()"><i class="mdi mdi-plus mr-1"></i>
+                    Modifier</button> &nbsp;
+                  <button *ngIf="update" type="button" class="btn btn-danger btn-rounded mb-2 me-2" (click)="annuler()"><i
+                      class="mdi mdi-plus mr-1"></i>
+                    Annuler</button> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- end card -->
+      </div>
+      <!-- end col -->
+      <div class="col-xl-8">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="me-2">
+                <h5 class="card-title mb-4">Liste des Classes</h5>
+              </div>
+  
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row mb-2">
+                      <div class="col-sm-4">
+                        <div class="search-box me-2 mb-2 d-inline-block">
+                          <div class="position-relative">
+                            <input type="text" class="form-control" placeholder="Rechercher classe..." (input)="searchFilter($event)">
+                            <i class="bx bx-search-alt search-icon"></i>
+  
+                          </div>
+                        </div>
+                      </div>
+                      <!-- end col-->
+                      <div class="col-sm-8">
+                        <div class="text-sm-end">
+                          <button type="button" class="btn  btn-sm btn-rounded"
+                            style="background-color: #1e88e5; color:white ;"><i
+                              class="fa fa-print"></i>&nbsp;Imprimer</button>
+                        </div>
+                      </div><!-- end col-->
+  
+                    </div>
+  
+                    <!-- Table data -->
+                    <!--          <app-transaction [transactions]="transactions |  filter:term"></app-transaction>-->
+                    <div class="table-responsive mb-0">
+                      <table class="table table-centered table-nowrap">
+                        <thead class="bg-info bg-soft p-4">
+                          <tr>
+                            <th style="text-align: center;">
+                              #
+                            </th>
+                            <th style="text-align: center;">Classe</th>
+                            <th style="text-align: center;">Nom Ecole</th>
+                            <th style="text-align: center;">Action</th>
+                            <th style="text-align: center;">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let dataClasse of classes| slice:startIndex:endIndex; let i = index;">
+                            <td>
+                              <a href="javascript: void(0);" class="text-body fw-bold"> {{i+1}}</a>
+                            </td>
+                            <td style="text-align: center;">{{dataClasse.nom}} </td>
+                            <td style="text-align: center;">{{dataClasse.nomEcole}} cycle</td>
+                            <!-- <td style="text-align: center;">
+                              <button type="button" class="btn btn-warning no-print"><i class="fas fa-edit"
+                                  (click)="UpdateClasse(dataClasse.id)"></i></button>&nbsp;
+                            </td>
+                            <td style="text-align: center;">
+                              <button type="button" (click)="golisteClasse(dataClasse.id)"
+                                class="btn btn-outline-success"><i class="fas fa-eye"></i>&nbsp;Listes Eleves</button>
+                            </td> -->
+                          </tr>
+  
+  
+                        </tbody>
+                      </table>
+  
+  
+  
+                      <ngb-pagination class="pagination pagination-rounded justify-content-end mb-2"
+                        [(page)]="currentPage" [pageSize]="pageSize" [collectionSize]="classes.length">
+                        
+                        <ul class="pagination pagination-rounded justify-content-end mb-2">
+                          <li class="page-item disabled">
+                            <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                              <i class="mdi mdi-chevron-left"></i>
+                            </a>
+                          </li>
+                          <li class="page-item active">
+                            <a class="page-link " href="javascript: void(0);">1</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="javascript: void(0);">2</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="javascript: void(0);">3</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="javascript: void(0);">4</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="javascript: void(0);">5</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                              <i class="mdi mdi-chevron-right"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </ngb-pagination>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end card -->
+        </div>
+        <!-- end col -->
+  
+      </div>
+      <!-- end row -->
+    </div>
+  
