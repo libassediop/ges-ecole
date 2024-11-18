@@ -24,7 +24,7 @@ export const MENU: MenuItem[] = [
     id: 2,
     label: 'Super admin',
     icon: 'bx bx-user-circle',
-    link: '/super-admin',
+    link: '/pages/super-admin',
     // subItems: [
     //   {
     //     id: 2,
@@ -44,7 +44,7 @@ export const MENU: MenuItem[] = [
     id: 3,
     label: 'Ecole',
     icon: 'bx bxs-school',
-    link: '/ecole'
+    link: '/pages/ecole'
     // subItems: [
     //   {
     //     id: 2,

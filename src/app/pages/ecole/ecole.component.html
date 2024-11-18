@@ -1,1 +1,181 @@
-<p>ecole works!</p>
+<div class="container-fluid">
+  <app-page-title title="Gestion Des Ecoles"></app-page-title>
+  <div class="row">
+    <div class="col-xl-4 no-print">
+      <!-- Form to add or update a matiere -->
+      <div class="card">
+        <div class="card-body">
+          <div class="me-2">
+            <h5 *ngIf="!update" class="card-title mb-4 text-primary">Ajout d'une nouvelle école</h5>
+            <h5 *ngIf="update" class="card-title mb-4 text-primary">Modification école</h5>
+          </div>
+          <form (ngSubmit)="update ? ModifierEcole() : AddEcole()">
+            <div class="text-center mt-4">
+              <div class="input-group bg-light rounded" [formGroup]="formM">
+                <input type="text" class="form-control bg-transparent border-0" placeholder="Nom de l'ecole" formControlName="nom">
+              </div>
+            </div>
+            <div class="text-center mt-4">
+              <div class="input-group bg-light rounded" [formGroup]="formM">
+                <input type="text" class="form-control bg-transparent border-0" placeholder="Adresse de l'ecole" formControlName="adresse">
+              </div>
+            </div>
+            <div class="text-center mt-4">
+              <div class="input-group bg-light rounded" [formGroup]="formM">
+                <input type="text" class="form-control bg-transparent border-0" placeholder="Email de l'ecole" formControlName="email">
+              </div>
+            </div>
+            <div class="text-center mt-4">
+              <div class="input-group bg-light rounded" [formGroup]="formM">
+                <input type="text" class="form-control bg-transparent border-0" placeholder="Télephone de l'ecole" formControlName="telephone">
+              </div>
+            </div>
+            <div class="text-center mt-4">
+              <div class="text-center">
+                <button *ngIf="!update" type="button" class="btn btn-success btn-rounded mb-2 me-2" [disabled]="formM.invalid" (click)="AddEcole()"><i class="fa fa-save"></i>&nbsp;
+                  Enregistrer</button>
+                <button *ngIf="update" type="button" class="btn btn-warning btn-rounded mb-2 me-2" [disabled]="formM.invalid" (click)="ModifierEcole()"><i class="fa fa-edit"></i>&nbsp;
+                  Modifier</button> &nbsp;
+                <button *ngIf="update" type="button" class="btn btn-danger btn-rounded mb-2 me-2" (click)="Annuler()"><i class="fa fa-undo"></i>&nbsp;
+                  Annuler</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8">
+      <!-- List of matieres -->
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-2">
+            <!-- Titre de la liste de matières -->
+            <div class="col-sm-6">
+              <div class="me-2">
+                <h5 class="card-title mb-4">Liste de toutes les écoles</h5>
+              </div>
+            </div>
+
+            <!-- Bouton "Imprimer" -->
+            <div class="col-sm-6 text-end">
+              <button type="button" class="btn btn-sm btn-rounded" style="background-color: #1e88e5; color: white;" (click)="imprimerMatieres()">
+                <i class="fa fa-print"></i>&nbsp;Imprimer
+              </button>
+
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <!-- Items per page selection -->
+            <div class="col-sm-6">
+              <div class="dataTables_length" id="tickets-table_length">
+                <label class="d-inline-flex align-items-center">
+                  Afficher
+                  <select [(ngModel)]="pageSize"
+                          class="custom-select custom-select-sm form-control form-control-sm mx-2">
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="25">25</option>
+                    <option [ngValue]="50">50</option>
+                    <option [ngValue]="100">100</option>
+                  </select>
+                  éléments
+                </label>
+              </div>
+            </div>
+            <!-- Search input -->
+            <div class="col-sm-6 text-end">
+              <div class="search-box me-2 mb-2 d-inline-block">
+                <div class="position-relative">
+                  <input type="text" class="form-control no-print" placeholder="Rechercher matière..."
+                         [(ngModel)]="selectedMatiere" />
+                  <i class="bx bx-search-alt search-icon no-print"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Table displaying matieres -->
+          <table class="table table-centered table-nowrap">
+            <thead class="bg-info bg-soft p-4">
+            <tr>
+              <th style="text-align: center;">#</th>
+              <th sortable="matière" style="text-align: center;">
+                Nom école
+                <i class="fas fa-sort pointer" ></i>
+              </th>
+              <th sortable="matière" style="text-align: center;">
+                Adresse
+                <i class="fas fa-sort pointer" ></i>
+              </th>
+              <th sortable="matière" style="text-align: center;">
+                Email
+                <i class="fas fa-sort pointer" ></i>
+              </th>
+              <th sortable="matière" style="text-align: center;">
+                Télèphone
+                <i class="fas fa-sort pointer" ></i>
+              </th>
+              <th style="text-align: center;" class="no-print">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ecole of this.ecole; let i = index">
+              <td style="text-align: center;">
+                <a href="javascript: void(0);" class="text-body fw-bold">{{ (i + 1) + (currentPage - 1) * pageSize }}</a>
+              </td>
+              <td style="text-align: center;">{{ ecole.nom }}</td>
+              <td style="text-align: center;">{{ ecole.adresse }}</td>
+              <td style="text-align: center;">{{ ecole.email }}</td>
+              <td style="text-align: center;">{{ ecole.telephone }}</td>
+              <td style="text-align: center">
+                <button type="button" class="btn btn-warning no-print" (click)="UpdateEcole(ecole)">
+                  <i class="fas fa-edit"></i>
+                </button>&nbsp;
+                <button type="button" class="btn btn-danger no-print" (click)="DeleteEcole(ecole.nom)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="d-flex justify-content-between align-items-center"> <!-- Utilisez d-flex pour aligner les éléments à gauche et à droite -->
+            <p class="text-muted mb-2">
+              Affichage de {{ (currentPage - 1) * pageSize + 1 }} à
+              {{ (currentPage * pageSize > filteredMatieres.length) ? filteredMatieres.length : (currentPage * pageSize) }}
+              sur {{ filteredMatieres.length }} éléments
+            </p>
+            <ngb-pagination class="pagination pagination-rounded justify-content-end mb-2"
+                            [(page)]="currentPage" [pageSize]="pageSize" [collectionSize]="filteredMatieres.length" >
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="table-container" class="table-responsive" style="display: none;">
+  <table class="table table-centered table-nowrap">
+    <thead class="bg-info bg-soft p-4">
+    <tr>
+      <th style="text-align: center;">#</th>
+      <th sortable="matière" style="text-align: center;">
+        Nom école
+        <i class="fas fa-sort pointer no-print" ></i>
+      </th>
+      <th style="text-align: center;" class="no-print">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let matiere of matieres; let i = index">
+      <td style="text-align: center;">
+        <a href="javascript: void(0);" class="text-body fw-bold">{{ (i + 1) + (currentPage - 1) * pageSize }}</a>
+      </td>
+      <td style="text-align: center;">{{ matiere.libelle }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+

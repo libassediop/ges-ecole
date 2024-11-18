@@ -1,1 +1,182 @@
-<p>super-admin works!</p>
+
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="d-flex">
+      <div class="col-sm-4">
+        <div class="search-box me-2 mb-2 d-inline-block">
+          <div class="position-relative">
+            <input type="text" class="form-control" placeholder="Recherche..."  />
+            <i class="bx bx-search-alt search-icon"></i>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-success  btn-rounded  ms-auto mb-2" (click)="extraLarge(content)">
+        <i class="mdi mdi-plus me-1"></i>Ajouter un super admin </button>
+    </div>
+    <ng-template #content role="document" let-modal>
+      <div class="modal-header">
+        <button type="button" class="btn-close" aria-hidden="true"
+                (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <aw-wizard [navBarLayout]="'large-empty-symbols'">
+        <aw-wizard-step stepTitle="Ajout Super Admin">
+          <ng-template awWizardStepSymbol>1</ng-template>
+
+          <div class="row">
+            <div class="col-md-12">
+
+              <div class="card card-body">
+                <div class="row mt-3">
+                  <div class="col-12">
+                    <div class="row mb-3">
+                      <div class="col-md-6" [formGroup]="formsuperadmin">
+                        <input class="form-control" type="text" placeholder="Username" formControlName="username">
+                      </div>
+                      <div class="col-md-6" [formGroup]="formsuperadmin">
+                        <input class="form-control" type="text" placeholder="Téléphone" formControlName="telephone" (ngModelChange)="testTelephone($event)">
+<!--                        <span class="text-danger" *ngIf="trouveTel" ><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;ce  numéro existe deja</span>-->
+                      </div>
+                      <div class="row mb-3"></div>
+                      <div class="col-md-6"[formGroup]="formsuperadmin">
+                        <input class="form-control" type="email" placeholder="Email" formControlName="email" (ngModelChange)="testEmail($event)">
+                        <span class="text-danger" *ngIf="formsuperadmin.get('email')?.hasError('email') && formsuperadmin.get('email')?.touched">
+                          <i class="fa fa-info-circle" aria-hidden="true"></i> L'adresse e-mail doit être valide et contenir un "@"
+                        </span>
+<!--                        <span class="text-danger" *ngIf="trouveEmail">-->
+<!--                          <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Cet email existe déjà-->
+<!--                        </span>-->
+                      </div>
+                      <div class="col-md-6" [formGroup]="formsuperadmin">
+                        <input class="form-control" type="text" placeholder="Mot de passe" formControlName="password">
+                        <span class="text-danger" *ngIf="formsuperadmin.get('password')?.hasError('invalidPassword')">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre, un caractère spécial et ne pas contenir d'espaces.
+                      </span>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div style="text-align:center;">
+                  <button class="btn btn-success" awFinishWizard [disabled]="formsuperadmin.invalid"  (click)="AddSuperAdmin()">Ajouter&nbsp;<i class="fa fa-save"></i></button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </aw-wizard-step>
+
+
+      </aw-wizard>
+    </ng-template>
+
+    <!--liste professeur-->
+    <div class="col-xl-2 col-md-6"   *ngFor="let dataPro of this.listsuperadmin">
+      <div class="card">
+        <div class="card-body">
+          <div class="favorite-icon" >
+            <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
+          </div>
+          <div class="avatar-sm mx-auto mb-4"  >
+              <span class="avatar-title rounded-circle bg-soft bg-info text-primary font-size-16" >
+                {{dataPro.username.charAt(0)}}
+              </span>
+          </div>
+          <!-- <div *ngIf="dataPro.image" class="mb-4">
+            <img class="rounded-circle avatar-sm" src="{{dataPro.image}}" alt />
+          </div> -->
+          <h5 class="fs-17 mb-2" style="text-align: center;"><a href="job-details.html" class="text-dark">{{dataPro.username }}</a> </h5>
+          <ul class="list-inline mb-0" style="text-align: center;">
+            <li class="list-inline-item" >
+              <p class="text-muted fs-14 mb-1 "><i class="mdi mdi-map-marker"></i>{{dataPro.email}}</p>
+            </li>
+            <li class="list-inline-item">
+              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-phone"></i>{{dataPro.telephone}}</p>
+            </li>
+            <li class="list-inline-item">
+              <button type="button" class="btn btn-white"  (click)="ModalUpdateAdmin(dataPro,contentUpdatePersonnel)">
+                <i class="bx bx-edit text-warning my-custom-icon" ></i>
+              </button>
+              <button type="button" class="btn btn-white" (click)="DeleteSperAdmin(dataPro.id)">
+                <i class="bx bx-trash text-danger my-custom-icon" ></i>
+              </button>
+
+
+            </li>
+          </ul>
+
+          <br>
+          <div class="card-footer bg-transparent border-top" style="text-align: center;">
+            <button  dataPro-bs-toggle="modal" class="btn btn-outline-success " ><i class="fa fa-eye"></i>&nbsp; Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--modal pour modifier un professeur-->
+  <ng-template #contentUpdatePersonnel role="document" let-modal>
+    <div class="modal-header">
+      <button type="button" class="btn-close" aria-hidden="true"
+              (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="row" >
+      <div class="col-md-12">
+        <div class="modal-body">
+          <form (ngSubmit)="updateSuperadmin()" [formGroup]="formsuperadmin" >
+            <div class="row mt-3">
+              <div class="col-12">
+                <div class="row mb-3">
+                  <div class="col-md-6" [formGroup]="formsuperadmin">
+                    <input class="form-control" type="text" placeholder="Username" formControlName="username">
+                  </div>
+                  <div class="col-md-6" [formGroup]="formsuperadmin">
+                    <input class="form-control" type="text" placeholder="Téléphone" formControlName="telephone" (ngModelChange)="testTelephone($event)">
+                    <!--                        <span class="text-danger" *ngIf="trouveTel" ><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;ce  numéro existe deja</span>-->
+                  </div>
+                  <div class="row mb-3"></div>
+                  <div class="col-md-6"[formGroup]="formsuperadmin">
+                    <input class="form-control" type="email" placeholder="Email" formControlName="email" (ngModelChange)="testEmail($event)">
+                    <span class="text-danger" *ngIf="formsuperadmin.get('email')?.hasError('email') && formsuperadmin.get('email')?.touched">
+                          <i class="fa fa-info-circle" aria-hidden="true"></i> L'adresse e-mail doit être valide et contenir un "@"
+                        </span>
+                  </div>
+                  <div class="col-md-6" [formGroup]="formsuperadmin">
+                    <input class="form-control" type="text" placeholder="Mot de passe" formControlName="password">
+                    <span class="text-danger" *ngIf="formsuperadmin.get('password')?.hasError('invalidPassword')">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre, un caractère spécial et ne pas contenir d'espaces.
+                      </span>
+                  </div>
+
+              </div>
+              <br>
+              <div style="text-align:center;">
+                <ul class="list-inline wizard mb-0" style="text-align: center; display: inline-block;">
+                  <button type="button"
+                          class="btn btn-danger" style="float:center;" (click)="annuler()"><i class="fa fa-undo" ></i>&nbsp;Annuler</button>
+                  &nbsp;
+                  <button type="button" class="btn btn-success"  style = "float:center;" [disabled]="formsuperadmin.invalid" (click)="updateSuperadmin()"><i class="fa fa-save"></i>&nbsp;Enregistrer </button>
+                </ul>
+              </div>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+
+  <div class="row">
+    <div class="col-12">
+      <div class="text-center my-3">
+        <a href="javascript:void(0);" class="text-success"  (click)="loadMore()"><i class="bx bx-hourglass bx-spin mr-2"></i> Voir plus </a>
+      </div>
+    </div>
+  </div>
+
+
+
+

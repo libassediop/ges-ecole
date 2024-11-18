@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ArchwizardModule } from 'angular-archwizard';
+
 
 import {
   NgbNavModule,
@@ -44,6 +46,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   ],
   imports: [
     CommonModule,
+    ArchwizardModule,
     FormsModule,
     NgbDropdownModule,
     NgbModalModule,
