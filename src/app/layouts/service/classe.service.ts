@@ -16,6 +16,10 @@ export class ClasseService {
   listeClasses(){
     return this.http.get(this.baseUrl+'/classes'+'/listeClassesParEcoles'+'?token='+localStorage.getItem('token'));
   }
+
+  creerClasses(cl:Classe){
+    return this.http.get(this.baseUrl+'/classes'+'/creerClasse'+'?token='+localStorage.getItem('token'));
+  }
   
 }
 

@@ -54,6 +54,95 @@ export class ClasseComponent implements OnInit {
     );
   }
 
+  Addclasse() {
+    console.log(this.classe);
+    this.classe.nom = this.formClasse.value.nom;
+    this.classe.nomEcole = this.formClasse.value.nomEcole;
+    this.serviceClasse.creerClasses(this.classe).subscribe(
+      result => {
+        console.log(result);
+        this.modalService.dismissAll();
+        if (result['sucsess']) {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'classe ajouté avec success',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.formClasse.reset()
+          this.serviceClasse.listeClasses().subscribe(
+            (result) => {
+              this.classes = result;
+            },
+            error => {
+              console.log(error);
+            }
+          );
+          this.formClasse.reset()
+        }
+        this.classe = {
+          nom: '',
+          nomEcole : ''
+        };
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
+  
+  // ModifierClasse (){
+  //   console.log(this.idClasse , this.classe)
+  //   this.classe.nom = this.formClasse.value.nom;
+  //   this.classe.nomEcole = this.formClasse.value.nomEcole;
+  //   this.serviceClasse.modifierClasse(this.idClasse, this.classe).subscribe(
+  //     result => {
+  //       this.classe = {
+  //         nom: '',
+  //         nomEcole:''
+          
+  //       };
+  //       this.update=false;
+  //       this.formClasse.reset();
+  //       this.classe = {
+  //         nom: '',
+  //         nomEcole:''
+          
+  //       };
+  //       if (result['success']) {
+  //         this.modalService.dismissAll();
+  //         this.formClasse.reset();
+  //         this.serviceClasse.listeClasses().subscribe(
+  //           (result) => {
+  //             this.classes = result;
+  //           },
+  //           error => {
+  //             console.log(error);
+  //           }
+  //         );
+  //         Swal.fire({
+  //           position: 'top-end',
+  //           icon: 'success',
+  //           title: 'classe modifié avec success',
+  //           showConfirmButton: false,
+  //           timer: 1500
+  //         });
+  //         this.formClasse.reset();
+  //       }
+
+  //     else {
+  //         Swal.fire({
+  //           icon: 'error',
+  //           title: 'Oops...',
+  //           text: 'Une erreur est survenue lors de la modification de la matière .',
+  //         });
+  //       }
+  //     },
+    
+  //   );
+  // }
+
   searchFilter(e) {
     const searchStr = e.target.value;
     if (searchStr.length === 0) {
@@ -67,8 +156,8 @@ export class ClasseComponent implements OnInit {
       );
     } else {
       this.classes = this.classes.filter((classe) => {
-        return classe.libelle.toLowerCase().startsWith(searchStr.toLowerCase())  ||
-        classe.libelle.toLowerCase() === searchStr;
+        return classe.nom.toLowerCase().startsWith(searchStr.toLowerCase())  ||
+        classe.nom.toLowerCase() === searchStr;
       });
     }
   }

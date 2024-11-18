@@ -16,11 +16,11 @@
               <div class="text-center mt-4">
                 <div class="input-group bg-light rounded" [formGroup]="formClasse">
                   <input type="text" class="form-control bg-transparent border-0" placeholder="Nom Classe"
-                    formControlName="libelle">
+                    formControlName="nom">
                 </div>
               </div>
   
-              <div class="text-center mt-4">
+              <!-- <div class="text-center mt-4">
                 <div class="input-group bg-light rounded" [formGroup]="formClasse">
                   <select type="text" class="form-control bg-transparent border-0" formControlName="niveau">
                     <option value="" selected disabled>Veuillez choisir le niveau</option>
@@ -29,13 +29,13 @@
                     <option value="3">3eme Cycle</option>
                   </select>
                 </div>
-              </div>
+              </div> -->
               <div class="text-center mt-4">
                 <div class="text-center">
-                  <!-- <button *ngIf="!update" type="button" class="btn btn-success btn-rounded mb-2 me-2" (click)="Addclasse()"
+                  <button *ngIf="!update" type="button" class="btn btn-success btn-rounded mb-2 me-2" (click)="Addclasse()"
                     [disabled]="formClasse.invalid"><i class="mdi mdi-plus mr-1"></i>
                     Ajouter</button>
-                  <button *ngIf="update" type="button" class="btn btn-warning btn-rounded mb-2 me-2"
+                  <!-- <button *ngIf="update" type="button" class="btn btn-warning btn-rounded mb-2 me-2"
                     (click)="ModifierClasse()"><i class="mdi mdi-plus mr-1"></i>
                     Modifier</button> &nbsp;
                   <button *ngIf="update" type="button" class="btn btn-danger btn-rounded mb-2 me-2" (click)="annuler()"><i
@@ -104,7 +104,7 @@
                               <a href="javascript: void(0);" class="text-body fw-bold"> {{i+1}}</a>
                             </td>
                             <td style="text-align: center;">{{dataClasse.nom}} </td>
-                            <td style="text-align: center;">{{dataClasse.nomEcole}} cycle</td>
+                            <td style="text-align: center;">{{dataClasse.nomEcole}} </td>
                             <!-- <td style="text-align: center;">
                               <button type="button" class="btn btn-warning no-print"><i class="fas fa-edit"
                                   (click)="UpdateClasse(dataClasse.id)"></i></button>&nbsp;
@@ -123,7 +123,7 @@
   
                       <ngb-pagination class="pagination pagination-rounded justify-content-end mb-2"
                         [(page)]="currentPage" [pageSize]="pageSize" [collectionSize]="classes.length">
-                        
+
                         <ul class="pagination pagination-rounded justify-content-end mb-2">
                           <li class="page-item disabled">
                             <a class="page-link" href="javascript: void(0);" aria-label="Previous">
